@@ -1,0 +1,27 @@
+<div class="col-md-4 offset-md-4 mt-2 mb-5">
+    
+    <h2>Unlock Account</h2>
+    <h4 style="color: green;">{{mesg}}</h4>
+    <form action="" #unlockUser="ngForm" (submit)="unLockUserAccount(unlockUser)" >
+        <div class="form-group">
+        <label >Email:</label>
+         <input class="form-control"   type="text" [(ngModel)]="unlockDetail.email" name="email" id="" required readonly>
+        </div>
+        <div class="form-group">
+        <label >Temporary Password</label>
+         <input class="form-control"  type="text" [(ngModel)]="unlockDetail.tempPaswd" name="tempPaswd" id="" required>
+        </div>
+        <div class="form-group">
+        <label >New Password</label>
+         <input class="form-control"  type="password" [(ngModel)]="unlockDetail.newPaswd" name="newPaswd" id="" required>
+        </div>
+        <div class="form-group">
+        <label >Confirm Password</label>
+         <input class="form-control" type="password" [(ngModel)]="unlockDetail.confirmPaswd" name="confirmPaswd" id="" required>
+        </div>
+        <div class="form-group">
+            <br>
+            <button class="btn btn-primary" type="submit" [disabled]="!unlockUser.valid">Submit</button>
+        </div>    
+    </form>
+</div>

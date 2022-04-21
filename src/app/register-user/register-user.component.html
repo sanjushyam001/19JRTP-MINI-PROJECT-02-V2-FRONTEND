@@ -1,0 +1,69 @@
+<div class="col-md-4 offset-md-4 mt-2 mb-5">
+    <h5 style="color: green;">{{mesg}}</h5>
+    <h2>Registration Form</h2>
+    
+    <form action="" #addUserForm="ngForm" (submit)="addUser(addUserForm)" >
+        <div class="form-group">
+        <label >First Name:</label>
+         <input class="form-control"   type="text" [(ngModel)]="user.fname" name="fname" id="" required>
+        </div>
+        <div class="form-group">
+        <label >Last Name:</label>
+         <input class="form-control"  type="text" [(ngModel)]="user.lname" name="lname" id="" required>
+        </div>
+        <div class="form-group">
+        <label >Email:</label>
+        <p style="color: red;">{{emailDuplicacyCheck}}</p>
+         <input class="form-control" (blur)="isEmailDuplicate($event)" type="email" [(ngModel)]="user.email" name="email" id="" required>
+        </div>
+        <div class="form-group">
+        <label >Phone:</label>
+         <input class="form-control" type="text" [(ngModel)]="user.phone" name="phone" id="" required>
+        </div>
+        <div class="form-group">
+        <label >DOB:</label>
+         <input class="form-control" type="date" [(ngModel)]="user.dob" name="dob" id="" required>
+        </div>
+      
+        <div class="form-group">
+        <label >Gender:</label>
+        <br>
+            <div class="form-check form-check-inline">
+            <input  class="form-check-input" type="radio" value="F" [(ngModel)]="user.gender" name="gender" id="">
+            <label class="form-check-label" for="inlineRadio1">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+            <input  class="form-check-input" type="radio" value="M" [(ngModel)]="user.gender" name="gender" id="">
+            <label class="form-check-label" for="inlineRadio1">Male</label>
+            </div>
+        </div>    
+        
+        <div class="form-group">
+            <label for="country">Select Country:</label>
+         
+            <select class="form-control" id="country" [(ngModel)]="user.countryId" name="countryId"  (change)="onChangeCountry($event)" required>
+                <option value="{{country.key}}" *ngFor="let country of countries | keyvalue">{{country.value}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="state">Select State:</label>
+            <select class="form-control" id="state" [(ngModel)]="user.stateId" name="stateId" id="" (change)="onChangeState($event)" required>
+                <option value="{{state.key}}" *ngFor="let state of states | keyvalue">{{state.value}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="city">Select City:</label>
+            <select class="form-control" id="city" [(ngModel)]="user.cityId" name="city" id=""   required>
+                <option value="{{city.key}}" *ngFor="let city of cities | keyvalue">{{city.value}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <br>
+            <button class="btn btn-primary" type="submit" [disabled]="!addUserForm.valid || (emailCheck==true)">Add User</button>
+       
+        &nbsp;
+         <button class="btn btn-danger" type="reset" (click)="restForm(addUserForm)">Rest</button> 
+        &nbsp;
+        </div>
+    </form>
+</div>
