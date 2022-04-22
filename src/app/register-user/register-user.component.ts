@@ -16,8 +16,10 @@ export class RegisterUserComponent implements OnInit {
   states:Map<number,string>=new Map<number,string>();
   cities:Map<number,string>=new Map<number,string>();
   mesg:string='';
+  saveUserAlert:boolean=false;
   emailDuplicacyCheck:string='';
   emailCheck:boolean=false;
+  invalidCheck:string="";
 
   constructor(private httpClient:HttpClient,private userService:UserService) { 
 
@@ -35,7 +37,7 @@ export class RegisterUserComponent implements OnInit {
         console.log("SUCCESSFULL........");
         console.log(data);
         this.mesg=data+" , We have sent an email with a temporary password to your email address ";
-        
+        this.saveUserAlert=true;
       
       },
       error=>{
@@ -122,9 +124,11 @@ export class RegisterUserComponent implements OnInit {
           if(statusObj.status==="UNIQUE"){
             this.emailDuplicacyCheck='';
             this.emailCheck=false;
+            this.invalidCheck="";
           }else{
             this.emailDuplicacyCheck='Email is already registered'
             this.emailCheck=true;
+            this.invalidCheck="is-invalid";
           }
           
          },

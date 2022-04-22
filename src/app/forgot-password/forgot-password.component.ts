@@ -12,6 +12,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   email:string='';
   mesg:string='';
+  alertType:string='';
+  unlockAlert:boolean=false;
   constructor(private userService:UserService,private router:Router,
               private activeRouter:ActivatedRoute) { }
 
@@ -26,7 +28,16 @@ export class ForgotPasswordComponent implements OnInit {
         let statusObj=JSON.parse(JSON.stringify(data));
         
         console.log(statusObj.status);
-        this.mesg=statusObj.status;
+        if(statusObj.status=="valid"){
+          this.mesg="Your password sent to your registered email"
+          this.alertType="success";
+          this.unlockAlert=true;
+        }
+        if(statusObj.status=="invalid"){
+          this.mesg="Please enter your registered email"
+          this.alertType="danger";
+          this.unlockAlert=true;
+        }
 
         
       }

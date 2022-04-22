@@ -1,7 +1,9 @@
 <div class="col-md-4 offset-md-4 mt-2 mb-5">
-    
+    <p *ngIf="unlockAlert" class="alert alert-{{alertType}}" role="alert" >
+        {{mesg}}
+    </p>
     <h2>Unlock Account</h2>
-    <h4 style="color: green;">{{mesg}}</h4>
+    
     <form action="" #unlockUser="ngForm" (submit)="unLockUserAccount(unlockUser)" >
         <div class="form-group">
         <label >Email:</label>

@@ -12,6 +12,8 @@ import { UserService } from '../user.service';
 export class UnlockUserComponent implements OnInit {
 email:string='';
 mesg:string='';
+unlockAlert:boolean=false;
+alertType:string='';
 unlockDetail:UnlockDetails=new UnlockDetails();
   constructor(private userService:UserService,router:Router,
     private activeRouter:ActivatedRoute) { }
@@ -36,7 +38,17 @@ unlockDetail:UnlockDetails=new UnlockDetails();
       data=>{
         console.log(" UNLOCKED SUCCESSFULL........");
         console.log(data);
-        this.mesg=data;
+        if(data=="valid"){
+        this.mesg="Your account unlocked successfully,visit Sign in page for login";
+        this.unlockAlert=true;
+        this.alertType="success";
+        }
+        if(data=="invalid"){
+          this.mesg="Please Enter correct temporary password ";
+          this.unlockAlert=true;
+          this.alertType="danger";
+        }
+        
         
       
       },

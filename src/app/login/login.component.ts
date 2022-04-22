@@ -11,6 +11,10 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
+  mesg:string='';
+  check:string='';
+  unlockAlert:boolean=false;
+  alertType:string='';
   loginDetail:LoginDetails=new LoginDetails();
   constructor(private userService:UserService,private router:Router,
               private activeRouter:ActivatedRoute) { }
@@ -26,8 +30,15 @@ export class LoginComponent implements OnInit {
       data=>{
         console.log(" LOGGED IN SUCCESSFULL........");
         console.log(data);
-        this.redirectToUserProfile(loginDetail.email);
-        //this.mesg=data;
+       
+        this.check=data;
+        if(this.check=="invalid"){
+          this.mesg="Invalid Credentials";
+          this.alertType="danger";
+          this.unlockAlert=true;
+        }else{
+          this.redirectToUserProfile(loginDetail.email);
+        }
         
       
       },
